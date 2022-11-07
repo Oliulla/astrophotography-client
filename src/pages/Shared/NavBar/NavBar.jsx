@@ -3,12 +3,24 @@ import { useState } from "react";
 import brandImg from "../../../assets/img/brandImg.jpg";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 
 const NavBar = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const {user, logOut} = useContext(AuthContext);
 
-  const user = {};
+  // sign out user
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        return alert('Successfully logged Out')
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   return (
     <nav className="bg-[#1c354b] px-4 py-4 md:px-14 w-full flex justify-between items-center z-40 static">
@@ -33,7 +45,7 @@ const NavBar = () => {
           Blog
         </Link>
         {user?.uid ? (
-          <button className="hover:text-yellow-600">Log Out</button>
+          <button onClick={handleLogOut} className="hover:text-yellow-600">Log Out</button>
         ) : (
           <>
             <Link className="hover:text-yellow-600" to="/register">
