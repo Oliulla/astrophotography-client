@@ -3,7 +3,7 @@ import Carousel from "../../components/Header/Carousel";
 import axios from "axios";
 import HomeServiceCard from "./HomeServiceCard";
 import { Link } from "react-router-dom";
-
+import HomeFeatures from "../../components/HomeFeatures/HomeFeatures";
 
 
 const Home = () => {
@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <main>
-      <Carousel/>
+      <Carousel />
       {/* services section */}
       <section className="w-11/12 my-14 mx-auto">
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
@@ -32,12 +32,16 @@ const Home = () => {
         </div>
         <div className="flex justify-center mt-5 mb-10">
           <Link to="/services">
-            <button className="btn btn-info text-xl hover:bg-blue-800 hover:text-white">See All</button>
+            <button className="btn btn-info text-xl hover:bg-blue-800 hover:text-white">
+              See All
+            </button>
           </Link>
         </div>
       </section>
-      <section>
-        <h2>Other meaningfull section</h2>
+      {/* devider */}
+      <div className="w-full h-[2px] bg-blue-500"></div>
+      <section className="mb-10">
+        <HomeFeatures />
       </section>
       <section>
         <h3>Photography skills section</h3>
