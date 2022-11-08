@@ -9,6 +9,7 @@ import Home from '../pages/Home/Home';
 import Root from '../Root/Root';
 import PrivateRoute from './PrivateRoute';
 import Services from '../pages/Services/Services';
+import ServiceDetails from '../components/ServiceDetails/ServiceDetails';
 
 
 export const router = createBrowserRouter([
@@ -48,6 +49,11 @@ export const router = createBrowserRouter([
             {
                 path: '/services',
                 element: <Services />
+            },
+            {
+                path: '/service/:id',
+                loader: ({params}) => fetch(`http://localhost:5000/service/${params.id}`),
+                element: <ServiceDetails />
             },
         ]
     }
