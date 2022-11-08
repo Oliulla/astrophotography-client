@@ -8,6 +8,7 @@ import ErrorPage from '../pages/Shared/ErrorPage/ErrorPage';
 import Home from '../pages/Home/Home';
 import Root from '../Root/Root';
 import PrivateRoute from './PrivateRoute';
+import Services from '../pages/Services/Services';
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: '/addservice',
                 element: <PrivateRoute><AddService /></PrivateRoute>
+            },
+            {
+                path: '/services',
+                element: <Services />
             },
         ]
     }
