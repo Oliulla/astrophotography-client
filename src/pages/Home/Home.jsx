@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <main>
-      <Carousel />
+      <Carousel/>
       {/* services section */}
       <section className="w-11/12 my-14 mx-auto">
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">

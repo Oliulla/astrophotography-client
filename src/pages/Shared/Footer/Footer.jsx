@@ -32,7 +32,7 @@ const Footer = () => {
           <p>
            <Link to='/'>
            <img className="w-8 h-8 inline-block rounded-full" src={brandImg} alt="astrophotography logo" />
-            <em className="text-xl md:text-2xl text-blue-900"> Astrophotography </em>
+            <em className="text-xl md:text-2xl text-blue-900 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"> Astrophotography </em>
             </Link><br />
             Copyright © 2022
           </p>

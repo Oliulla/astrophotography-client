@@ -1,3 +1,4 @@
+import { StarIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -15,8 +16,19 @@ const HomeServiceCard = ({service}) => {
                 servDesc.length > 100 ? `${servDesc.slice(0, 100)}...` : servDesc
             }
         </p>
-        <p className="md:text-xl text-red-700">Price: {servPrice}</p>
-        <p className="md:text-xl text-yellow-500">Rating: {servRating}</p>
+        <p className="md:text-xl text-red-700">Price:
+            <span className="text-info px-1">{servPrice}</span>
+        </p>
+        <div>
+            <p className="text-xl text-yellow-500">
+              <span>{servRating}</span>
+            <StarIcon className="w-4 h-4 inline" />
+            <StarIcon className="w-4 h-4 inline" />
+            <StarIcon className="w-4 h-4 inline" />
+            <StarIcon className="w-4 h-4 inline" />
+            <StarIcon className="w-4 h-4 inline" />
+            </p>
+            </div>
         
         <div className="card-actions justify-end">
           <Link to={`/service/${_id}`}>
