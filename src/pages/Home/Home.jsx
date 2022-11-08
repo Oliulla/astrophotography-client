@@ -4,6 +4,7 @@ import axios from "axios";
 import HomeServiceCard from "./HomeServiceCard";
 import { Link } from "react-router-dom";
 import HomeFeatures from "../../components/HomeFeatures/HomeFeatures";
+import BgImg from "../../components/BgImg/BgImg";
 
 
 const Home = () => {
@@ -40,11 +41,13 @@ const Home = () => {
       </section>
       {/* devider */}
       <div className="w-full h-[2px] bg-blue-500"></div>
-      <section className="mb-10">
+      <section>
         <HomeFeatures />
       </section>
       <section>
-        <h3>Photography skills section</h3>
+        <div id="bgImg">
+          <BgImg />
+        </div>
       </section>
       <section>
         <h2>Get in touch section</h2>
