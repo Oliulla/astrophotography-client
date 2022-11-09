@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,19 +15,32 @@ const Register = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
+    const photoURL = form.photoURL.value;
     const password = form.password.value;
+    const userInfo = {name, email, photoURL, password}
+    console.log(userInfo);
 
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+
+        // update user profile
+        updateUserProfile(name, photoURL)
+          .then(result => {
+            // const user = result.user;
+          })
+          .catch(err => {
+            toast.warn(err.message)
+          })
+
+          console.log(result.user)
+
         toast.success("Successfully Registered!", {
             position: toast.POSITION.TOP_CENTER
         });
         form.reset();
       })
       .catch((err) => {
-        console.log(err);
+        toast.warn(err.message)
       });
   };
 
@@ -61,6 +74,20 @@ const Register = () => {
               required
             />
           </div>
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">PhotoURL</span>
+            </label>
+            <input
+              type="text"
+              name="photoURL"
+              placeholder="photoURL"
+              className="input input-bordered"
+              required
+            />
+          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Password</span>

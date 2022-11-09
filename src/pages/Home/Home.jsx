@@ -57,6 +57,7 @@ const Home = () => {
         </div>
         </div>
       </section>
+      <div className="w-full h-[2px] bg-slate-400"></div>
     </main>
   );
 };
