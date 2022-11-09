@@ -6,7 +6,7 @@ import fullMoon from "../../assets/img/fullMoon.jpg";
 const HomeFeatures = () => {
   return (
     <div>
-      <div className="grid md:grid-cols-2 py-6 md:py-10 px-4 mx-auto w-full bg-[#191A2C]">
+      <div className="grid md:grid-cols-2 py-6 md:py-10 px-4 mx-auto w-full bg-[#191A2C] text-white">
         <div>
           <img src={lunarEclipse} alt="full moon" />
         </div>
@@ -14,7 +14,7 @@ const HomeFeatures = () => {
           <h2 className="text-info text-4xl">
             Photograph the Total Lunar Eclipse
           </h2>
-          <p className="my-3">November 4, 2022 | Tutorials | 7 Comments</p>
+          <p className="my-3 text-secondary">November 4, 2022 | Tutorials | 7 Comments</p>
           <p className="my-3">
             Are you hoping to capture a photo of the upcoming total lunar
             eclipse on November 8th? If so, you are not alone. Amateur

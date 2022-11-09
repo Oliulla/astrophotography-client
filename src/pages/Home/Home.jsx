@@ -45,12 +45,16 @@ const Home = () => {
         <HomeFeatures />
       </section>
       <section>
-        <div id="bgImg">
           <BgImg />
-        </div>
       </section>
       <section>
-        <h2>Get in touch section</h2>
+        <div className="text-center bg-black py-10">
+        <h2 className="text-5xl font-semibold text-info">Get In Touch</h2>
+        <div className="my-6">
+          <input className="px-2 py-3 w-60 border border-blue-500 text-white" type="email" placeholder="email" /> 
+          <button className="bg-blue-600 py-3 px-4 text-xl font-semibold text-white">Subscribe</button>
+        </div>
+        </div>
       </section>
     </main>
   );
