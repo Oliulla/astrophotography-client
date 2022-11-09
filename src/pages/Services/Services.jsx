@@ -16,7 +16,7 @@ const Services = () => {
       });
   }, []);
 
-  console.log(allServices);
+  // console.log(allServices);
 
   return (
     <div className="w-11/12 my-14 mx-auto">

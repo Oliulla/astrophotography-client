@@ -1,14 +1,34 @@
 import { StarIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import AddReviewForm from "../AddReviewForm/AddReviewForm";
+import AllReviews from "../AllReviews/AllReviews";
 
 const ServiceDetails = () => {
   const { data } = useLoaderData({});
   const { servImg, servName, servDesc, servPrice, servRating, _id } = data;
   const { user } = useContext(AuthContext);
+  const [reviews, setReviews] = useState([]);
+
+  // get users review
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/reviews`)
+      .then((res) => {
+        setReviews(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  
+  const specificServReviews = reviews.filter(specificRev => specificRev.reviewInfo?.serviceId === _id);
+  console.log(specificServReviews);
 
   return (
     <div className="flex flex-col mt-10 mb-24 md:mx-16">
@@ -38,7 +58,7 @@ const ServiceDetails = () => {
         </div>
         <div className="mt-4 md:mt-0">
           {user?.uid ? (
-            <AddReviewForm serviceId={_id} />
+            <AddReviewForm serviceId={_id} servName={servName} />
           ) : (
             <div>
               <h2 className="text-center text-4xl text-white mt-20">
@@ -53,7 +73,7 @@ const ServiceDetails = () => {
             </div>
           )}
           <div>
-            <h2 className="text-center text-4xl text-white mt-20">
+            <h2 className="text-center text-xl md:text-4xl text-white mt-10 md:mt-20">
               Please! <br />
               Scroll Down To Read Others Review
             </h2>
@@ -62,16 +82,15 @@ const ServiceDetails = () => {
       </div>
       <div className="h-[2px] w-full bg-blue-600 my-10"></div>
       <section className="mb-20 text-4xl">
-        <h2>User Reviews section</h2>
-        <div className="card w-96 bg-black shadow-xl">
-          <div className="card-body">
-            <h2 className="card-title">Card title!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
+        <h2 className="text-center text-white border-b-2">All Reviews</h2>
+        <div className="grid md:grid-cols-3 justify-center mt-7">
+          {specificServReviews?.map((rev) => {
+            return <AllReviews key={rev._id} reviewInfo={rev.reviewInfo} />;
+          })}
         </div>
+        {
+          !specificServReviews.length && <p className="text-white">No Review</p>
+        }
       </section>
     </div>
   );
