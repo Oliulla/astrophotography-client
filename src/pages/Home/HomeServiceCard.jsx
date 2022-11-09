@@ -23,7 +23,7 @@ const HomeServiceCard = ({ service }) => {
         </p>
         <p className="md:text-xl text-red-700">
           Price:
-          <span className="text-info px-1">{servPrice}</span>
+          <span className="text-info px-1"><span>$</span>{servPrice}</span>
         </p>
         <div>
           <p className="text-xl text-yellow-500">

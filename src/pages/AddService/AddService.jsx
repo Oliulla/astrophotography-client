@@ -13,7 +13,7 @@ const AddService = () => {
     const servDesc = form.desc.value;
     const servRating = form.rating.value;
 
-    console.log(servPrice, servImg, servName, servDesc, servRating);
+    // console.log(servPrice, servImg, servName, servDesc, servRating);
 
     axios.post("http://localhost:5000/services", {
       servPrice,

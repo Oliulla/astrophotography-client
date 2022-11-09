@@ -26,9 +26,9 @@ const ServiceDetails = () => {
         console.log(err);
       });
   }, []);
-  
-  const specificServReviews = reviews.filter(specificRev => specificRev.reviewInfo?.serviceId === _id);
-  console.log(specificServReviews);
+  // console.log(reviews)
+  const specificServReviews = reviews.filter(specificRev => specificRev?.serviceId === _id);
+  // console.log(specificServReviews);
 
   return (
     <div className="flex flex-col mt-10 mb-24 md:mx-16">
@@ -41,7 +41,7 @@ const ServiceDetails = () => {
             <h2 className="card-title text-white text-3xl">{servName}</h2>
             <p className="text-[1rem]">{servDesc}</p>
             <div className="grid grid-cols-2 justify-evenly my-8">
-              <p className="text-xl text-red-700">Price: {servPrice}</p>
+              <p className="text-xl text-red-700">Price: <span className="text-info">${servPrice}</span></p>
               <div>
                 <p className="text-xl text-yellow-500">
                   {" "}
@@ -84,8 +84,8 @@ const ServiceDetails = () => {
       <section className="mb-20 text-4xl">
         <h2 className="text-center text-white border-b-2">All Reviews</h2>
         <div className="grid md:grid-cols-3 justify-center mt-7">
-          {specificServReviews?.map((rev) => {
-            return <AllReviews key={rev._id} reviewInfo={rev.reviewInfo} />;
+          {specificServReviews?.map((reviewInfo) => {
+            return <AllReviews key={reviewInfo._id} reviewInfo={reviewInfo} />;
           })}
         </div>
         {

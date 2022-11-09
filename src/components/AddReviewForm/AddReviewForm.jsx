@@ -13,20 +13,26 @@ const AddReviewForm = ({ serviceId, servName }) => {
 
     const userReview = e.target.review.value;
     const ratings = e.target.ratings.value;
-    const reviewInfo = {
-      userName,
-      userEmail,
-      userPhotoURL,
-      userReview,
-      ratings,
-      serviceId,
-      servName,
-    };
-    console.log(reviewInfo);
+    // const reviewInfo = {
+    //   userName,
+    //   userEmail,
+    //   userPhotoURL,
+    //   userReview,
+    //   ratings,
+    //   serviceId,
+    //   servName,
+    // };
+    // console.log(reviewInfo);
 
     axios
       .post("http://localhost:5000/reviews", {
-        reviewInfo,
+        userName,
+        userEmail,
+        userPhotoURL,
+        userReview,
+        ratings,
+        serviceId,
+        servName,
       })
       .then((response) => {
         console.log(response);
