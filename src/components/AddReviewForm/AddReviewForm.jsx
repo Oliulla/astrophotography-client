@@ -20,13 +20,13 @@ const AddReviewForm = ({ serviceId, servName }) => {
       userReview,
       ratings,
       serviceId,
-      servName
+      servName,
     };
     console.log(reviewInfo);
 
     axios
       .post("http://localhost:5000/reviews", {
-        reviewInfo
+        reviewInfo,
       })
       .then((response) => {
         console.log(response);
@@ -37,51 +37,49 @@ const AddReviewForm = ({ serviceId, servName }) => {
   };
 
   return (
-    <>
-      <div className="mx-4 md:ml-10 bg-[#1D2A35] px-6 pt-8 pb-20">
-        <h3 className="text-xl md:text-4xl font-semibold text-white">
+    <div className="mx-4 md:ml-10 bg-[#1D2A35] px-6 pt-8 pb-20">
+      <h3 className="text-xl md:text-4xl font-semibold text-white">
+        Add Review
+      </h3>
+      <form onSubmit={handleAddReview} className="grid grid-cols-2 my-6">
+        <input
+          type="text"
+          defaultValue={userName}
+          title="you can't change"
+          className="input input-bordered w-full text-white"
+          readOnly
+        />
+        <input
+          type="number"
+          name="ratings"
+          title="Give Rating"
+          defaultValue="5"
+          min="1"
+          max="5"
+          className="input input-info input-bordered w-24 md:w-40 text-white mx-6"
+        />
+        <textarea
+          className="textarea textarea-info resize-none my-6 row-span-2 h-28 text-white"
+          placeholder="your review"
+          title="put your valuable message"
+          name="review"
+          required
+        ></textarea>
+        <input
+          type="email"
+          defaultValue={userEmail}
+          title="you can't change"
+          className="input input-bordered w-10/12 my-6 mx-6 text-white row-span-2"
+          readOnly
+        />
+        <button
+          className="btn btn-info hover:bg-blue-700 hover:text-white w-full"
+          title="click submit to add review"
+        >
           Add Review
-        </h3>
-        <form onSubmit={handleAddReview} className="grid grid-cols-2 my-6">
-          <input
-            type="text"
-            defaultValue={userName}
-            title="you can't change"
-            className="input input-bordered w-full text-white"
-            readOnly
-          />
-          <input
-            type="number"
-            name="ratings"
-            title="Give Rating"
-            defaultValue="5"
-            min="1"
-            max="5"
-            className="input input-info input-bordered w-24 md:w-40 text-white mx-6"
-          />
-          <textarea
-            className="textarea textarea-info resize-none my-6 row-span-2 h-28 text-white"
-            placeholder="your review"
-            title="put your valuable message"
-            name="review"
-            required
-          ></textarea>
-          <input
-            type="email"
-            defaultValue={userEmail}
-            title="you can't change"
-            className="input input-bordered w-10/12 my-6 mx-6 text-white row-span-2"
-            readOnly
-          />
-          <button
-            className="btn btn-info hover:bg-blue-700 hover:text-white w-full"
-            title="click submit to add review"
-          >
-            Add Review
-          </button>
-        </form>
-      </div>
-    </>
+        </button>
+      </form>
+    </div>
   );
 };
 

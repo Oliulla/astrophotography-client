@@ -73,7 +73,7 @@ const ServiceDetails = () => {
             </div>
           )}
           <div>
-            <h2 className="text-center text-xl md:text-4xl text-white mt-10 md:mt-20">
+            <h2 className="text-center text-xl md:text-4xl text-white mt-8">
               Please! <br />
               Scroll Down To Read Others Review
             </h2>
@@ -89,7 +89,7 @@ const ServiceDetails = () => {
           })}
         </div>
         {
-          !specificServReviews.length && <p className="text-white">No Review</p>
+          !specificServReviews.length && <p className="text-white">No Review for {servName}</p>
         }
       </section>
     </div>
