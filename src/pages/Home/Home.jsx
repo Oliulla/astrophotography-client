@@ -8,6 +8,7 @@ import BgImg from "../../components/BgImg/BgImg";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
+import SpinnerAnimation from "../../components/SpinnerAnimation/SpinnerAnimation";
 
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
       .get("https://astrophotography-server.vercel.app/limitServices")
       .then((res) => {
         setServices(res.data.data);
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err);
@@ -33,7 +35,7 @@ const Home = () => {
       <Carousel />
       <div>
         {
-          loading ? "Loading...." : undefined
+          !services.length ? <SpinnerAnimation /> : undefined
         }
       </div>
       {/* services section */}

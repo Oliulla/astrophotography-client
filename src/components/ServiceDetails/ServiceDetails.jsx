@@ -83,7 +83,7 @@ const ServiceDetails = () => {
       <div className="grid md:grid-cols-2 justify-center ">
         <div className="card card-compact w-full bg-black shadow-xl">
           <figure>
-            <img src={servImg} alt={servName} className="w-full h-72" />
+            <img src={servImg} alt={servName} className="w-full h-72 hero-overlay" />
           </figure>
           <div className="card-body">
             <h2 className="card-title text-white text-3xl">{servName}</h2>
