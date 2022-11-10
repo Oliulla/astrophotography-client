@@ -41,6 +41,10 @@ const ServiceDetails = () => {
   ) => {
     e.preventDefault();
 
+    const date = new Date();
+    const submitTime = date.getTime();
+    
+
     const userReview = e.target.review.value;
     const ratings = e.target.ratings.value;
     console.log();
@@ -53,6 +57,7 @@ const ServiceDetails = () => {
         ratings,
         serviceId,
         servName,
+        submitTime
       })
       .then((response) => {
         // console.log(_id, serviceId);
