@@ -3,6 +3,7 @@ import React from "react";
 
 const AllReviews = ({ reviewInfo }) => {
   const { userName, userPhotoURL, ratings, userReview } = reviewInfo;
+  // console.log(reviewInfo);
 
   return (
     <div className="card w-96 bg-black shadow-xl mt-6 md:mt-0">

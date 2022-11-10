@@ -14,6 +14,7 @@ const ServiceDetails = () => {
   const { servImg, servName, servDesc, servPrice, servRating, _id } = data;
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [specificServReviews, setSpecificServReviews] = useState([]);
 
   // get users review
   useEffect(() => {
@@ -26,9 +27,54 @@ const ServiceDetails = () => {
         console.log(err);
       });
   }, []);
-  // console.log(reviews)
-  const specificServReviews = reviews.filter(specificRev => specificRev?.serviceId === _id);
-  // console.log(specificServReviews);
+
+  // post user review to db
+  const handleAddReview = (
+    e,
+    userName,
+    userEmail,
+    userPhotoURL,
+    serviceId,
+    servName
+  ) => {
+    e.preventDefault();
+
+    const userReview = e.target.review.value;
+    const ratings = e.target.ratings.value;
+    console.log();
+    axios
+      .post("http://localhost:5000/reviews", {
+        userName,
+        userEmail,
+        userPhotoURL,
+        userReview,
+        ratings,
+        serviceId,
+        servName,
+      })
+      .then((response) => {
+        // console.log(_id, serviceId);
+        // const specificServReviews = reviews.filter((specificRev) => specificRev?.serviceId === ._id);
+        // const specificServReviews = specificReviews.filter((specificRev) => specificRev?._id === _id);
+        // setSpecificReviews([...specificReviews, specificServReviews])
+        // setReviews(specificServReviews);
+        console.log(response);
+        const newReviews = response.data;
+        setReviews([...reviews, newReviews]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    // get reviews depends on user
+    const newSpecificServReviews = reviews.filter(
+      (specificRev) => specificRev?.serviceId === _id
+    );
+    setSpecificServReviews(newSpecificServReviews);
+
+  }, [_id, reviews]);
 
   return (
     <div className="flex flex-col mt-10 mb-24 md:mx-16">
@@ -41,7 +87,9 @@ const ServiceDetails = () => {
             <h2 className="card-title text-white text-3xl">{servName}</h2>
             <p className="text-[1rem]">{servDesc}</p>
             <div className="grid grid-cols-2 justify-evenly my-8">
-              <p className="text-xl text-red-700">Price: <span className="text-info">${servPrice}</span></p>
+              <p className="text-xl text-red-700">
+                Price: <span className="text-info">${servPrice}</span>
+              </p>
               <div>
                 <p className="text-xl text-yellow-500">
                   {" "}
@@ -58,7 +106,11 @@ const ServiceDetails = () => {
         </div>
         <div className="mt-4 md:mt-0">
           {user?.uid ? (
-            <AddReviewForm serviceId={_id} servName={servName} />
+            <AddReviewForm
+              serviceId={_id}
+              servName={servName}
+              handleAddReview={handleAddReview}
+            />
           ) : (
             <div>
               <h2 className="text-center text-4xl text-white mt-20">
@@ -83,14 +135,17 @@ const ServiceDetails = () => {
       <div className="h-[2px] w-full bg-blue-600 my-10"></div>
       <section className="mb-20 text-4xl">
         <h2 className="text-center text-white border-b-2">All Reviews</h2>
-        <div className="grid md:grid-cols-3 justify-center mt-7">
+        <div className="grid md:grid-cols-3 justify-center mt-7 gap-6">
+          {/* {specificReviews.map((reviewInfo) => 
+            console.log(reviewInfo)
+          )} */}
           {specificServReviews?.map((reviewInfo) => {
             return <AllReviews key={reviewInfo._id} reviewInfo={reviewInfo} />;
           })}
         </div>
-        {
-          !specificServReviews.length && <p className="text-white">No Review for {servName}</p>
-        }
+        {!specificServReviews.length && (
+          <p className="text-white">No Review for {servName}</p>
+        )}
       </section>
     </div>
   );

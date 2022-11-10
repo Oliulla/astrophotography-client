@@ -1,53 +1,46 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-const AddReviewForm = ({ serviceId, servName }) => {
+const AddReviewForm = ({ serviceId, servName, handleAddReview }) => {
   const { user } = useContext(AuthContext);
   const userName = user?.displayName;
   const userEmail = user?.email;
   const userPhotoURL = user?.photoURL;
 
-  const handleAddReview = (e) => {
-    e.preventDefault();
+  // const handleAddReview = (e) => {
+  //   e.preventDefault();
 
-    const userReview = e.target.review.value;
-    const ratings = e.target.ratings.value;
-    // const reviewInfo = {
-    //   userName,
-    //   userEmail,
-    //   userPhotoURL,
-    //   userReview,
-    //   ratings,
-    //   serviceId,
-    //   servName,
-    // };
-    // console.log(reviewInfo);
+  //   const userReview = e.target.review.value;
+  //   const ratings = e.target.ratings.value;
 
-    axios
-      .post("http://localhost:5000/reviews", {
-        userName,
-        userEmail,
-        userPhotoURL,
-        userReview,
-        ratings,
-        serviceId,
-        servName,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   axios
+  //     .post("http://localhost:5000/reviews", {
+  //       userName,
+  //       userEmail,
+  //       userPhotoURL,
+  //       userReview,
+  //       ratings,
+  //       serviceId,
+  //       servName,
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return (
     <div className="mx-4 md:ml-10 bg-[#1D2A35] px-6 pt-8 pb-20">
       <h3 className="text-xl md:text-4xl font-semibold text-white">
         Add Review
       </h3>
-      <form onSubmit={handleAddReview} className="grid grid-cols-2 my-6">
+      <form
+        onSubmit={(e) => handleAddReview(e, userName, userEmail, userPhotoURL, serviceId, servName)}
+        className="grid grid-cols-2 my-6"
+      >
         <input
           type="text"
           defaultValue={userName}

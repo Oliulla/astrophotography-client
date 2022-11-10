@@ -5,10 +5,14 @@ import HomeServiceCard from "./HomeServiceCard";
 import { Link } from "react-router-dom";
 import HomeFeatures from "../../components/HomeFeatures/HomeFeatures";
 import BgImg from "../../components/BgImg/BgImg";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const Home = () => {
   const [services, setServices] = useState([]);
+  const {loading, setLoading} = useContext(AuthContext);
+ console.log(loading);
 
   useEffect(() => {
     axios
@@ -24,7 +28,11 @@ const Home = () => {
   return (
     <main>
       <Carousel />
-      
+      <div>
+        {
+          loading ? "Loading...." : undefined
+        }
+      </div>
       {/* services section */}
       <section className="w-11/12 my-14 mx-auto">
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">

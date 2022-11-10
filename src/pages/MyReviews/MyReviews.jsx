@@ -35,6 +35,7 @@ const MyReviews = () => {
         .then((res) => {
           const remainingReviews = myReview.filter(review => review._id !== userDeleteId);
           setMyReview(remainingReviews);
+          toast.success(`successfully deleted review for ${servName}`);
         })
         .catch((err) => {
           toast.warn(err?.message);
@@ -54,6 +55,11 @@ const MyReviews = () => {
             <MyEachReview key={reviewInfo._id+idx} reviewInfo={reviewInfo} idx={idx} handleReviewDelete={handleReviewDelete} />
             </div> 
           })}
+          <h2 className="text-info">
+            {
+              !myReview.length && "No review added." 
+            }
+          </h2>
         </div>
     </section>
   );

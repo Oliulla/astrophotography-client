@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 import HomeServiceCard from "../Home/HomeServiceCard";
 
 const Services = () => {
   const [allServices, setAllServices] = useState([]);
+  const {loading, setLoading} = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -20,6 +23,9 @@ const Services = () => {
 
   return (
     <div className="w-11/12 my-14 mx-auto">
+      {
+        loading ? "Loading..." : undefined
+      }
       <div className="grid md:grid-cols-3 gap-8 justify-center items-center">
         {allServices.map((service) => {
           return <HomeServiceCard key={service._id} service={service} />;
