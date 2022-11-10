@@ -8,30 +8,6 @@ const AddReviewForm = ({ serviceId, servName, handleAddReview }) => {
   const userEmail = user?.email;
   const userPhotoURL = user?.photoURL;
 
-  // const handleAddReview = (e) => {
-  //   e.preventDefault();
-
-  //   const userReview = e.target.review.value;
-  //   const ratings = e.target.ratings.value;
-
-  //   axios
-  //     .post("https://astrophotography-server-oliulla.vercel.app/reviews", {
-  //       userName,
-  //       userEmail,
-  //       userPhotoURL,
-  //       userReview,
-  //       ratings,
-  //       serviceId,
-  //       servName,
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   return (
     <div className="mx-4 md:ml-10 bg-[#1D2A35] px-6 pt-8 pb-20">
       <h3 className="text-xl md:text-4xl font-semibold text-white">

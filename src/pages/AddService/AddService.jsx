@@ -18,7 +18,7 @@ const AddService = () => {
 
     // console.log(servPrice, servImg, servName, servDesc, servRating);
 
-    axios.post("https://astrophotography-server-oliulla.vercel.app/services", {
+    axios.post("https://astrophotography-server.vercel.app/services", {
       servPrice,
       servImg,
       servName,

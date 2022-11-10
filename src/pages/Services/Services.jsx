@@ -14,7 +14,7 @@ const Services = () => {
 
   useEffect(() => {
     axios
-      .get("https://astrophotography-server-oliulla.vercel.app/services")
+      .get("https://astrophotography-server.vercel.app/services")
       .then((res) => {
         setAllServices(res.data.data);
       })

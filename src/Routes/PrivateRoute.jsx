@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
     return <SpinnerAnimation />;
   }
 
-  if (user) {
+  if (user?.uid) {
     return children;
   }
   <Navigate to="/login" state={{ from: location }} replace />;

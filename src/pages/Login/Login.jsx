@@ -32,7 +32,7 @@ const Login = () => {
         console.log(currentUser)
         
         // get jwt token
-        fetch(`http://localhost:5000/jwt`, {
+        fetch(`https://astrophotography-server.vercel.app/jwt`, {
           method: "POST",
           headers: {
             'content-type' : 'application/json'
@@ -44,7 +44,7 @@ const Login = () => {
           localStorage.setItem('astro-token', data.token);
 
           navigate(from, {replace: true});
-          
+
           toast.success("Successfully logged in!", {
             position: toast.POSITION.TOP_CENTER
         });
