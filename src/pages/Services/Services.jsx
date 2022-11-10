@@ -17,7 +17,6 @@ const Services = () => {
       .get("https://astrophotography-server-oliulla.vercel.app/services")
       .then((res) => {
         setAllServices(res.data.data);
-        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -32,7 +31,7 @@ const Services = () => {
         !allServices.length ? <SpinnerAnimation /> : undefined
       }
       <div className="grid md:grid-cols-3 gap-8 justify-center items-center">
-        {allServices.map((service) => {
+        {allServices?.map((service) => {
           return <HomeServiceCard key={service._id} service={service} />;
         })}
       </div>

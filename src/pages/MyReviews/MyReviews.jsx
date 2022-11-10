@@ -1,25 +1,28 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import MyEachReview from "../../components/MyEachReview/MyEachReview";
+import SpinnerAnimation from "../../components/SpinnerAnimation/SpinnerAnimation";
 import useTitle from "../../hooks/useTitle";
 
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setLoading, logOut } = useContext(AuthContext);
   const email  = user?.email;
   const [myReview, setMyReview] = useState([]);
-  // const [displayReview, setDisplayReview] = useState(myReview);
   useTitle('myreviews');
 
-  
   useEffect(() => {
     axios
-      .get(`https://astrophotography-server-oliulla.vercel.app/reviews?email=${email}`)
+      .get(`http://localhost:5000/reviews?email=${email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('astro-token')}`
+        }
+      })
       .then((res) => {
+        if(res.status === 401 || res.status === 403) {
+          logOut();
+        }
         setMyReview(res.data.data);
       })
       .catch((err) => {
@@ -27,10 +30,12 @@ const MyReviews = () => {
       });
   }, [email]);
 
+  
   const handleReviewDelete = (userDeleteId, servName) => {
     console.log(userDeleteId, servName)
     const isAgree = window.confirm(`Are you sure to delete review for ${servName}`);
-    console.log(isAgree);
+    
+    // delete user review
     if (isAgree) {
       axios
         .delete(`https://astrophotography-server-oliulla.vercel.app/reviews/${userDeleteId}`)
@@ -45,12 +50,13 @@ const MyReviews = () => {
     }
   };
 
-  // console.log(displayReview);
-  // console.log(myReview);
 
   return (
     <section className="mb-20 text-4xl flex flex-col items-center mt-10">
       <h2 className="text-center text-white border-b-2">My Reviews</h2>
+        {/* {
+          !myReview.length ? <SpinnerAnimation /> : undefined
+        } */}
         <div className="grid md:grid-cols-3 gap-4 justify-center mt-7">
           {myReview?.map((reviewInfo, idx) => {
             return <div>

@@ -41,7 +41,7 @@ const Home = () => {
       {/* services section */}
       <section className="w-11/12 my-14 mx-auto">
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-          {services.map((service) => {
+          {services?.map((service) => {
             return <HomeServiceCard key={service._id} service={service} />;
           })}
         </div>

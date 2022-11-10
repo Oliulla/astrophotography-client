@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateReview = () => {
   const review = useLoaderData();
@@ -16,13 +16,13 @@ const UpdateReview = () => {
     // review.data.userReview = updateDesc;
     // console.log("update rev", review);
     // setNewReview()
-    
+
     axios
       .put(`http://localhost:5000/reviews/${review.data._id}`, {
         userReview,
       })
       .then((res) => {
-        console.log(res);
+        toast.success('updated successfully')
       })
       .catch((err) => {
         console.log(err);
