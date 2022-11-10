@@ -1,9 +1,14 @@
 import { StarIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-const MyEachReview = ({ reviewInfo }) => {
-  const { userName, userPhotoURL, ratings, userReview } = reviewInfo;
-  console.log(reviewInfo)
+const MyEachReview = ({ reviewInfo, handleReviewDelete }) => {
+  const { userName, userPhotoURL, ratings, userReview, servName, _id } = reviewInfo;
+
+  
+
   return (
     <div className="card w-96 bg-black shadow-xl mt-6 md:mt-0">
       <div className="card-body text-white">
@@ -30,8 +35,13 @@ const MyEachReview = ({ reviewInfo }) => {
         <p className="text-[1.1rem] mt-4">{userReview}</p>
       </div>
       <div className="flex justify-start gap-5 mx-4 py-6">
-      <button className="btn btn-outline btn-error">Delete Review</button>
-      <button className="btn btn-outline btn-info">Edit Review</button>
+        <button
+          onClick={() => handleReviewDelete(_id, servName)}
+          className="btn btn-outline btn-error"
+        >
+          Delete Review
+        </button>
+        <button className="btn btn-outline btn-info">Edit Review</button>
       </div>
     </div>
   );
