@@ -5,6 +5,7 @@ import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const HomeServiceCard = ({ service }) => {
   const { servImg, servName, servDesc, servPrice, servRating, _id } = service;
+  
   return (
     <div className="card card-compact w-96 bg-black shadow-xl">
       <figure>

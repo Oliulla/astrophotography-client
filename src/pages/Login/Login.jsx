@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
 import { toast } from 'react-toastify';
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
+  useTitle('login')
 
   const handleSubmit = (e) => {
     e.preventDefault();

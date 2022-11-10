@@ -22,4 +22,3 @@
 
 * Live Link:
     * [Astrophotography](https://astrophotography-2b4fc.web.app)
-

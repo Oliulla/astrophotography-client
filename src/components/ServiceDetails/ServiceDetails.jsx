@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import AddReviewForm from "../AddReviewForm/AddReviewForm";
 import AllReviews from "../AllReviews/AllReviews";
 
@@ -15,6 +16,7 @@ const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [specificServReviews, setSpecificServReviews] = useState([]);
+  useTitle('service-details');
 
   // get users review
   useEffect(() => {

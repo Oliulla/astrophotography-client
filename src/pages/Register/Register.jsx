@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
 import { toast } from 'react-toastify';
+import useTitle from "../../hooks/useTitle";
 
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  useTitle('register')
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import HomeServiceCard from "../Home/HomeServiceCard";
 
 const Services = () => {
   const [allServices, setAllServices] = useState([]);
   const {loading, setLoading} = useContext(AuthContext);
+  useTitle('services');
 
   useEffect(() => {
     axios

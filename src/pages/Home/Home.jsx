@@ -7,12 +7,15 @@ import HomeFeatures from "../../components/HomeFeatures/HomeFeatures";
 import BgImg from "../../components/BgImg/BgImg";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 
 const Home = () => {
   const [services, setServices] = useState([]);
   const {loading, setLoading} = useContext(AuthContext);
+  useTitle('home')
  console.log(loading);
+
 
   useEffect(() => {
     axios
