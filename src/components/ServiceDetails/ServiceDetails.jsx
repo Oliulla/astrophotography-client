@@ -21,7 +21,7 @@ const ServiceDetails = () => {
   // get users review
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/reviews`)
+      .get(`https://astrophotography-server-oliulla.vercel.app/reviews`)
       .then((res) => {
         setReviews(res.data.data);
       })
@@ -45,7 +45,7 @@ const ServiceDetails = () => {
     const ratings = e.target.ratings.value;
     console.log();
     axios
-      .post("http://localhost:5000/reviews", {
+      .post("https://astrophotography-server-oliulla.vercel.app/reviews", {
         userName,
         userEmail,
         userPhotoURL,

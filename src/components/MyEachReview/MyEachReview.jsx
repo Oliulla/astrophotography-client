@@ -1,10 +1,10 @@
 import { StarIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { Link } from "react-router-dom";
 
-
-
-const MyEachReview = ({ reviewInfo, handleReviewDelete, handleReviewEdit }) => {
-  const { userName, userPhotoURL, ratings, userReview, servName, _id } = reviewInfo;
+const MyEachReview = ({ reviewInfo, handleReviewDelete }) => {
+  const { userName, userPhotoURL, ratings, userReview, servName, _id } =
+    reviewInfo;
 
   return (
     <div className="card w-96 bg-black shadow-xl mt-6 md:mt-0">
@@ -29,17 +29,21 @@ const MyEachReview = ({ reviewInfo, handleReviewDelete, handleReviewEdit }) => {
             </p>
           </div>
         </div>
-        <h2 className="text-2xl">Your Review for <em className="text-info">{servName}</em></h2>
+        <h2 className="text-2xl">
+          Your Review for <em className="text-info">{servName}</em>
+        </h2>
         <p className="text-[1.1rem] mt-4">{userReview}</p>
       </div>
       <div className="flex justify-start gap-5 mx-4 py-6">
         <button
           onClick={() => handleReviewDelete(_id, servName)}
-          className="btn btn-outline btn-error"
+          className="btn btn-outline btn-error mt-1"
         >
           Delete Review
         </button>
-        <button onClick={() => handleReviewEdit(_id, servName)} className="btn btn-outline btn-info">Edit Review</button>
+        <Link to={`/updateReview/${_id}`}>
+          <button className="btn btn-outline btn-info">Update Review</button>
+        </Link>
       </div>
     </div>
   );

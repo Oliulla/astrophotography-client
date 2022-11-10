@@ -10,6 +10,7 @@ import Root from '../Root/Root';
 import PrivateRoute from './PrivateRoute';
 import Services from '../pages/Services/Services';
 import ServiceDetails from '../components/ServiceDetails/ServiceDetails';
+import UpdateReview from '../pages/UpdateReview/UpdateReview';
 
 
 export const router = createBrowserRouter([
@@ -52,9 +53,14 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/service/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/service/${params.id}`),
+                loader: ({params}) => fetch(`https://astrophotography-server-oliulla.vercel.app/service/${params.id}`),
                 element: <ServiceDetails />
             },
+            {
+                path: '/updateReview/:id',
+                loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`),
+                element: <UpdateReview />
+            }
         ]
     }
 ])

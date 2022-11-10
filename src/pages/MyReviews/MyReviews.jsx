@@ -18,7 +18,7 @@ const MyReviews = () => {
   
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/reviews?email=${email}`)
+      .get(`https://astrophotography-server-oliulla.vercel.app/reviews?email=${email}`)
       .then((res) => {
         setMyReview(res.data.data);
       })
@@ -33,7 +33,7 @@ const MyReviews = () => {
     console.log(isAgree);
     if (isAgree) {
       axios
-        .delete(`http://localhost:5000/reviews/${userDeleteId}`)
+        .delete(`https://astrophotography-server-oliulla.vercel.app/reviews/${userDeleteId}`)
         .then((res) => {
           const remainingReviews = myReview.filter(review => review._id !== userDeleteId);
           setMyReview(remainingReviews);

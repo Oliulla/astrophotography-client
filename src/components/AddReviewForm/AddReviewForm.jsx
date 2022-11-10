@@ -15,7 +15,7 @@ const AddReviewForm = ({ serviceId, servName, handleAddReview }) => {
   //   const ratings = e.target.ratings.value;
 
   //   axios
-  //     .post("http://localhost:5000/reviews", {
+  //     .post("https://astrophotography-server-oliulla.vercel.app/reviews", {
   //       userName,
   //       userEmail,
   //       userPhotoURL,
