@@ -15,15 +15,15 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const {loading, setLoading} = useContext(AuthContext);
   useTitle('home')
- console.log(loading);
+//  console.log(loading);
 
 
   useEffect(() => {
     axios
-      .get("https://astrophotography-server.vercel.app/limitServices")
+      .get(`http://localhost:5000/limitServices`)
       .then((res) => {
         setServices(res.data.data);
-        setLoading(false)
+        // setLoading(false)
       })
       .catch((err) => {
         console.log(err);

@@ -10,7 +10,7 @@ const Carousel = () => {
   return (
     <div className="carousel w-full">
       <div id="slide1" className="carousel-item relative w-full">
-        <img src={img1} className="w-full h-96" />
+        <img src={img1} className="w-full h-96" alt="" />
         <div className="absolute top-20 left-20 md:top-1/4 md:left-56 text-info md:text-4xl w-8/12">
           <AnimatedText
             type="chars" // animate words or chars
@@ -42,7 +42,7 @@ const Carousel = () => {
         </div>
       </div>
       <div id="slide2" className="carousel-item relative w-full">
-        <img src={img2} className="w-full h-96" />
+        <img src={img2} className="w-full h-96" alt="" />
         <div className="absolute top-20 left-20 md:top-1/4 md:left-56 text-info text-xl md:text-4xl w-8/12">
           <AnimatedText
             type="chars" // animate words or chars
@@ -74,7 +74,7 @@ const Carousel = () => {
         </div>
       </div>
       <div id="slide3" className="carousel-item relative w-full">
-        <img src={img3} className="w-full h-96" />
+        <img src={img3} className="w-full h-96" alt="" />
         <div className="absolute top-20 left-20 md:top-1/4 md:left-56 text-info text-xl md:text-4xl w-8/12">
           <AnimatedText
             type="chars" // animate words or chars
@@ -106,7 +106,7 @@ const Carousel = () => {
         </div>
       </div>
       <div id="slide4" className="carousel-item relative w-full">
-        <img src={img4} className="w-full h-96" />
+        <img src={img4} className="w-full h-96" alt="" />
         <div className="absolute top-20 left-20 md:top-1/4 md:left-56 text-info text-xl md:text-4xl w-8/12">
           <AnimatedText
             type="chars" // animate words or chars

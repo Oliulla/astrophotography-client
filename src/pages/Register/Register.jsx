@@ -1,15 +1,17 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import useTitle from "../../hooks/useTitle";
-
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
-  useTitle('register')
+  useTitle("register");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state?.from?.pathname || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,28 +26,45 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-
+        const currentUser = {
+          email: email
+        };
         // update user profile
         updateUserProfile(name, photoURL)
-          .then(result => {
+          .then((result) => {
             // const user = result.user;
           })
-          .catch(err => {
-            toast.warn(err.message)
+          .catch((err) => {
+            toast.warn(err.message);
+          });
+
+
+        // get jwt token
+        fetch(`http://localhost:5000/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("astro-token", data.token);
+
+            navigate(from, { replace: true });
+
+            toast.success("Successfully registered!", {
+              position: toast.POSITION.TOP_CENTER,
+            });
           })
-
-          console.log(result.user)
-
-        toast.success("Successfully Registered!", {
-            position: toast.POSITION.TOP_CENTER
-        });
+          .catch((err) => toast.warn(err?.message));
+        // navigate(from, { replace: true });
         form.reset();
       })
       .catch((err) => {
-        toast.warn(err.message)
+        toast.warn(err.message);
       });
   };
-
 
   return (
     <div className="hero py-20 bg-slate-600 w-full">

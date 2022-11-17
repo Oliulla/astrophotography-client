@@ -10,11 +10,11 @@ const Services = () => {
   const [allServices, setAllServices] = useState([]);
   const {loading, setLoading} = useContext(AuthContext);
   useTitle('services');
-  console.log(loading)
+  // console.log(loading)
 
   useEffect(() => {
     axios
-      .get("https://astrophotography-server.vercel.app/services")
+      .get(`http://localhost:5000/services`)
       .then((res) => {
         setAllServices(res.data.data);
       })

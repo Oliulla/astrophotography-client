@@ -3,16 +3,16 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
-  useTitle('login')
+  useTitle("login");
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,35 +27,34 @@ const Login = () => {
 
         const currentUser = {
           email: user.email,
-        }
+        };
 
-        console.log(currentUser)
-        
+        console.log(currentUser);
+
         // get jwt token
-        fetch(`https://astrophotography-server.vercel.app/jwt`, {
+        fetch(`http://localhost:5000/jwt`, {
           method: "POST",
           headers: {
-            'content-type' : 'application/json'
+            "content-type": "application/json",
           },
-          body: JSON.stringify(currentUser)
+          body: JSON.stringify(currentUser),
         })
-        .then(res => res.json())
-        .then(data => {
-          localStorage.setItem('astro-token', data.token);
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("astro-token", data.token);
 
-          navigate(from, {replace: true});
+            navigate(from, { replace: true });
 
-          toast.success("Successfully logged in!", {
-            position: toast.POSITION.TOP_CENTER
-        });
-
-        })
-        .catch(err => toast.warn(err?.message))
+            toast.success("Successfully logged in!", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          })
+          .catch((err) => toast.warn(err?.message));
       })
       .catch((err) => {
         toast.warn("wrong email/password", err?.message, {
-          position: toast.POSITION.TOP_CENTER
-      });
+          position: toast.POSITION.TOP_CENTER,
+        });
       });
   };
 
@@ -93,7 +92,7 @@ const Login = () => {
         <div className="px-10 mt-0 pb-3">
           <GoogleSignIn />
           <p className="py-4 hover:underline text-center mt-2">
-            <Link to="/register">New to Sohoz Bazar? Register Now</Link>
+            <Link to="/register">New to Astrophotography? Register Now</Link>
           </p>
         </div>
       </div>

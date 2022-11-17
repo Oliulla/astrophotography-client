@@ -28,12 +28,19 @@ const HomeServiceCard = ({ service }) => {
         </p>
         <div>
           <p className="text-xl text-yellow-500">
-            <span>{servRating}</span>
+            <span>
+              {
+                [...Array(parseInt(servRating))].map((a, i) => {
+                  return <StarIcon key={i} className="w-4 h-4 inline" />
+
+                })
+                // console.log(servRating)
+              }
+            </span>
+            {/* <StarIcon className="w-4 h-4 inline" />
             <StarIcon className="w-4 h-4 inline" />
             <StarIcon className="w-4 h-4 inline" />
-            <StarIcon className="w-4 h-4 inline" />
-            <StarIcon className="w-4 h-4 inline" />
-            <StarIcon className="w-4 h-4 inline" />
+            <StarIcon className="w-4 h-4 inline" /> */}
           </p>
         </div>
 

@@ -5,31 +5,79 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 import AddReviewForm from "../AddReviewForm/AddReviewForm";
 import AllReviews from "../AllReviews/AllReviews";
+import { useQuery } from "@tanstack/react-query";
+import SpinnerAnimation from "../SpinnerAnimation/SpinnerAnimation";
 
 const ServiceDetails = () => {
   const { data } = useLoaderData({});
   const { servImg, servName, servDesc, servPrice, servRating, _id } = data;
   const { user } = useContext(AuthContext);
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   const [specificServReviews, setSpecificServReviews] = useState([]);
-  useTitle('service-details');
+  useTitle("service-details");
 
-  // get users review
+  const {
+    data: reviews = [],
+    error,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["allreviews"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/allreviews");
+      const data = await res.json();
+      return data.data;
+    },
+  });
+
+  // if (isLoading) return 'Loading...'
+
+  // if (error) return 'An error has occurred: ' + error.message
+
+  // // get users review
+  // useEffect(() => {
+  //   axios
+  //     .get(`process.env.REACT_APP_API_SERVER/allreviews`)
+  //     .then((res) => {
+  //       setReviews(res.data.data);
+  //       console.log(res)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios
-      .get("https://astrophotography-server.vercel.app/reviews")
-      .then((res) => {
-        setReviews(res.data.data);
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    console.log("inside useEffect", reviews);
+    // get reviews depends on user
+    const newSpecificServReviews = reviews.filter(
+      (specificRev) => specificRev?.serviceId === _id
+    );
+    console.log(newSpecificServReviews);
+    setSpecificServReviews(newSpecificServReviews);
+  }, [reviews, _id, isLoading, error]);
+
+  // useEffect(() => {
+  //   // get reviews depends on user
+  //   const newSpecificServReviews = reviews?.data.filter(
+  //     (specificRev) => specificRev?.serviceId === _id
+  //   );
+  //   setSpecificServReviews(newSpecificServReviews);
+
+  // }, [_id, reviews?.data]);
+
+  // if (isLoading){
+  //   return <SpinnerAnimation />
+  // }
+
+  // if (error) {
+  //   toast.warn(error.message)
+  // }
 
   // post user review to db
   const handleAddReview = (
@@ -44,13 +92,12 @@ const ServiceDetails = () => {
 
     const date = new Date();
     const submitTime = date.getTime();
-    
 
     const userReview = e.target.review.value;
     const ratings = e.target.ratings.value;
     console.log();
     axios
-      .post("https://astrophotography-server.vercel.app/reviews", {
+      .post("http://localhost:5000/reviews", {
         userName,
         userEmail,
         userPhotoURL,
@@ -58,38 +105,36 @@ const ServiceDetails = () => {
         ratings,
         serviceId,
         servName,
-        submitTime
+        submitTime,
       })
       .then((response) => {
-        // console.log(_id, serviceId);
-        // const specificServReviews = reviews.filter((specificRev) => specificRev?.serviceId === ._id);
-        // const specificServReviews = specificReviews.filter((specificRev) => specificRev?._id === _id);
-        // setSpecificReviews([...specificReviews, specificServReviews])
-        // setReviews(specificServReviews);
         console.log(response);
         const newReviews = response.data;
-        setReviews([...reviews, newReviews]);
+        // // setReviews([...reviews, newReviews]);
+        // const newSpecificServReviews = reviews?.data.filter(
+        //   (specificRev) => specificRev?.serviceId === _id
+        // );
+        // console.log(newSpecificServReviews);
+        // setSpecificServReviews(newSpecificServReviews);
+        refetch();
+
+        toast.success("Review added successfully");
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    // get reviews depends on user
-    const newSpecificServReviews = reviews.filter(
-      (specificRev) => specificRev?.serviceId === _id
-    );
-    setSpecificServReviews(newSpecificServReviews);
-
-  }, [_id, reviews]);
-
   return (
     <div className="flex flex-col mt-10 mb-24 md:mx-16">
       <div className="grid md:grid-cols-2 justify-center ">
         <div className="card card-compact w-full bg-black shadow-xl">
           <figure>
-            <img src={servImg} alt={servName} className="w-full h-72 hero-overlay" />
+            <img
+              src={servImg}
+              alt={servName}
+              className="w-full h-72 hero-overlay"
+            />
           </figure>
           <div className="card-body">
             <h2 className="card-title text-white text-3xl">{servName}</h2>
