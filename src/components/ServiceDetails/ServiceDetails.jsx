@@ -23,8 +23,6 @@ const ServiceDetails = () => {
 
   const {
     data: reviews = [],
-    error,
-    isLoading,
     refetch,
   } = useQuery({
     queryKey: ["allreviews"],
