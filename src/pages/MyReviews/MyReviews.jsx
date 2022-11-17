@@ -15,7 +15,7 @@ const MyReviews = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/reviews?email=${email}`,
+        `https://astrophotography-server.vercel.app/reviews?email=${email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("astro-token")}`,
@@ -43,7 +43,7 @@ const MyReviews = () => {
     if (isAgree) {
       axios
         .delete(
-          `process.env.REACT_APP_API_SERVER/reviews/${userDeleteId}`
+          `https://astrophotography-server.vercel.app/reviews/${userDeleteId}`
         )
         .then((res) => {
           const remainingReviews = myReview.filter(

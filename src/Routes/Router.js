@@ -53,12 +53,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/service/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/service/${params.id}`),
+                loader: ({params}) => fetch(`https://astrophotography-server.vercel.app/service/${params.id}`),
                 element: <ServiceDetails />
             },
             {
                 path: '/updateReview/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`),
+                loader: ({params}) => fetch(`https://astrophotography-server.vercel.app/reviews/${params.id}`),
                 element: <UpdateReview />
             }
         ]

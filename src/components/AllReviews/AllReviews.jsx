@@ -19,12 +19,18 @@ const AllReviews = ({ reviewInfo }) => {
           </div>
           <div title={`${userName} gave ${ratings} star`}>
             <p className="text-xl text-yellow-500">
-              <span>{ratings}</span>
+              <span>
+              {
+                [...Array(parseInt(ratings))].map((a, i) => {
+                  return <StarIcon key={i} className="w-4 h-4 inline" />
+                })
+              }
+              </span>
+              {/* <StarIcon className="w-4 h-4 inline" />
               <StarIcon className="w-4 h-4 inline" />
               <StarIcon className="w-4 h-4 inline" />
               <StarIcon className="w-4 h-4 inline" />
-              <StarIcon className="w-4 h-4 inline" />
-              <StarIcon className="w-4 h-4 inline" />
+              <StarIcon className="w-4 h-4 inline" /> */}
             </p>
           </div>
         </div>

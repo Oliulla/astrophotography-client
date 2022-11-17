@@ -29,7 +29,7 @@ const ServiceDetails = () => {
   } = useQuery({
     queryKey: ["allreviews"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allreviews");
+      const res = await fetch("https://astrophotography-server.vercel.app/allreviews");
       const data = await res.json();
       return data.data;
     },
@@ -53,14 +53,14 @@ const ServiceDetails = () => {
   // }, []);
 
   useEffect(() => {
-    console.log("inside useEffect", reviews);
+    // console.log("inside useEffect", reviews);
     // get reviews depends on user
     const newSpecificServReviews = reviews.filter(
       (specificRev) => specificRev?.serviceId === _id
     );
-    console.log(newSpecificServReviews);
+    // console.log(newSpecificServReviews);
     setSpecificServReviews(newSpecificServReviews);
-  }, [reviews, _id, isLoading, error]);
+  }, [reviews, _id]);
 
   // useEffect(() => {
   //   // get reviews depends on user
@@ -97,7 +97,7 @@ const ServiceDetails = () => {
     const ratings = e.target.ratings.value;
     console.log();
     axios
-      .post("http://localhost:5000/reviews", {
+      .post("https://astrophotography-server.vercel.app/reviews", {
         userName,
         userEmail,
         userPhotoURL,
@@ -145,13 +145,17 @@ const ServiceDetails = () => {
               </p>
               <div>
                 <p className="text-xl text-yellow-500">
-                  {" "}
-                  {servRating}
+                  
+                  {
+                    [...Array(parseInt(servRating))].map((a, i) => {
+                      return <StarIcon key={i} className="w-4 h-4 inline" />
+                    })
+                  }
+                  {/* <StarIcon className="w-4 h-4 inline" />
                   <StarIcon className="w-4 h-4 inline" />
                   <StarIcon className="w-4 h-4 inline" />
                   <StarIcon className="w-4 h-4 inline" />
-                  <StarIcon className="w-4 h-4 inline" />
-                  <StarIcon className="w-4 h-4 inline" />
+                  <StarIcon className="w-4 h-4 inline" /> */}
                 </p>
               </div>
             </div>

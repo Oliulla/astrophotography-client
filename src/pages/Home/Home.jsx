@@ -20,7 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/limitServices`)
+      .get(`https://astrophotography-server.vercel.app/limitServices`)
       .then((res) => {
         setServices(res.data.data);
         // setLoading(false)

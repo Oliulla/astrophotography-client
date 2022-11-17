@@ -18,7 +18,7 @@ const UpdateReview = () => {
     // setNewReview()
 
     axios
-      .put(`http://localhost:5000/reviews/${review.data._id}`, {
+      .put(`https://astrophotography-server.vercel.app/reviews/${review.data._id}`, {
         userReview,
       })
       .then((res) => {
